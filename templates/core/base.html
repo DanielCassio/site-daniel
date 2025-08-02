@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blog | EngDaniel.cloud{% endblock %}</title>
+    <!-- Carrega o Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define a fonte Inter como padrão */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Cabeçalho com Navegação -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="{% url 'core:home' %}" class="text-2xl font-bold text-gray-800">EngDaniel.cloud</a>
+            <div class="flex space-x-6 items-center">
+                 <a href="{% url 'core:home' %}" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+                 <a href="{% url 'core:post_list' %}" class="text-gray-600 hover:text-blue-600 transition-colors font-semibold text-blue-600">Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container mx-auto px-6 py-8">
+        {% block content %}
+        <!-- O conteúdo específico de cada página será inserido aqui -->
+        {% endblock %}
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-white mt-8 py-4">
+        <div class="container mx-auto px-6 text-center text-gray-600">
+            <p>&copy; {% now "Y" %} Daniel Cássio. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

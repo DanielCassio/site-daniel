@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ post.title }} | EngDaniel.cloud{% endblock %}
+
+{% block content %}
+<article class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+    
+    {% if post.post_image %}
+        <img src="{{ post.post_image.url }}" alt="{{ post.title }}" class="w-full h-auto rounded-lg mb-8 shadow-md">
+    {% endif %}
+
+    <h1 class="text-5xl font-extrabold mb-4 text-gray-900">{{ post.title }}</h1>
+    <p class="text-md text-gray-500 mb-6">
+        Por {{ post.author.get_full_name|default:post.author.username }} em {{ post.created_at|date:"d de F de Y" }}
+    </p>
+    <div class="prose prose-lg max-w-none text-gray-800">
+        {{ post.content|linebreaks }}
+    </div>
+
+    <div class="mt-8 pt-6 border-t border-gray-200">
+        <a href="{% url 'core:post_list' %}" class="text-blue-600 hover:underline">
+            &larr; Voltar para todos os posts
+        </a>
+    </div>
+</article>
+{% endblock %}
