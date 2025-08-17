@@ -127,9 +127,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # No final de config/settings.py
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+# ]
 
 # Configurações para arquivos de mídia (uploads dos usuários)
 MEDIA_URL = '/media/'
