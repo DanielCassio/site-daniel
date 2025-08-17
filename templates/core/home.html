@@ -30,7 +30,6 @@
                 <!-- Link para o seu blog -->
                 <a href="{% url 'core:post_list' %}" class="text-gray-600 hover:text-blue-600 transition-colors">Blog</a>
             </div>
-            <!-- Menu para mobile (opcional, pode ser implementado depois) -->
             <div class="md:hidden">
                 <button class="text-gray-600 focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -44,9 +43,7 @@
         <!-- SEÇÃO INÍCIO (HERO) -->
         <section id="inicio" class="py-20 md:py-32">
             <div class="container mx-auto px-6 text-center">
-                <!-- LINHA CORRIGIDA -->
                 <img src="{% static 'images/foto-perfil.png' %}" alt="Foto de Perfil" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white shadow-lg object-cover">
-                
                 <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900">Daniel Cássio</h1>
                 <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
                     Engenheiro da Computação e entusiasta de tecnologia, transformando ideias em soluções digitais.
@@ -85,10 +82,13 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-12">Projetos Recentes</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
                     {% for post in latest_posts %}
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                        <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Projeto" alt="Imagem do Projeto" class="w-full h-48 object-cover">
+                        {% if post.post_image %}
+                            <img src="{{ post.post_image.url }}" alt="{{ post.title }}" class="w-full h-48 object-cover">
+                        {% else %}
+                            <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Projeto" alt="Imagem do Projeto" class="w-full h-48 object-cover">
+                        {% endif %}
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">{{ post.title }}</h3>
                             <p class="text-gray-700 mb-4">
@@ -100,10 +100,10 @@
                     {% empty %}
                     <p class="text-center text-gray-600 col-span-full">Ainda não há projetos para mostrar. Volte em breve!</p>
                     {% endfor %}
-
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- RODAPÉ -->
@@ -113,16 +113,18 @@
         </div>
     </footer>
 
-    <script src="http://zammad.engdaniel.cloud:8080/assets/chat/chat-no-jquery.min.js"></script>
-<script>
-(function() {
-  new ZammadChat({
-    fontSize: '12px',
-    chatId: 1
-  });
-})();
-</script>
+    <!-- SCRIPT DO CHAT DO ZAMMAD -->
+    <script src="https://zammad.engdaniel.cloud/assets/chat/chat-no-jquery.min.js"></script>
+    <script>
+      (function() {
+        new ZammadChat({
+          title: 'Fale comigo!',
+          fontSize: '12px',
+          chatId: 1,
+          debug: true // Habilita o modo de depuração
+        });
+      })();
+    </script>
     
 </body>
 </html>
-
